@@ -14,18 +14,13 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         body: Center(
+          heightFactor: 3,
+          widthFactor: 3,
           child: Container(
-            width: 200,
-            height: 200,
+            height: 100,
+            width: 100,
             color: Colors.red,
-            child: Container(
-              alignment: Alignment.center,
-              child: Text("naber"),
-              width: 100,
-              height: 100,
-              margin: EdgeInsets.all(30),
-              color: Colors.blue,
-            ),
+            child: Text("Arda"),
           ),
         ),
         appBar:
