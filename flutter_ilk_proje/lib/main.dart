@@ -5,6 +5,9 @@ void main(List<String> args) {
 }
 
 class MyApp extends StatelessWidget {
+  String _img1 = "https://i.ytimg.com/vi/xEuX6HCUFWI/maxresdefault.jpg";
+  String _img2 =
+      'https://emrealtunbilek.com/wp-content/uploads/2016/10/apple-icon-72x72.png';
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,13 +17,40 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         body: Center(
-          heightFactor: 3,
-          widthFactor: 3,
           child: Container(
-            height: 100,
-            width: 100,
-            color: Colors.red,
-            child: Text("Arda"),
+            padding: EdgeInsets.all(12),
+            child: Container(
+              margin: EdgeInsets.all(12),
+              child: Text(
+                "Arda Sak",
+                style: TextStyle(
+                  fontSize: 64,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(
+                color: Colors.orange,
+                shape: BoxShape.rectangle,
+                border: Border.all(color: Colors.red, width: 5),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    topRight: Radius.circular(50)),
+                image: DecorationImage(
+                  image: NetworkImage(_img2),
+                  fit: BoxFit.scaleDown,
+                  repeat: ImageRepeat.repeatX,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.green,
+                      offset: Offset(0, 15),
+                      blurRadius: 10),
+                  BoxShadow(
+                      color: Colors.yellow,
+                      offset: Offset(15, 0),
+                      blurRadius: 10)
+                ]),
           ),
         ),
         appBar:
