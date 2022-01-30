@@ -37,9 +37,9 @@ class _homePageState extends State<homePage> {
   late Timer _timer;
   void _start() {
     setState(() {
-      const oneSec = const Duration(milliseconds: 1);
+      const oneMilSec = const Duration(milliseconds: 1);
       _timer = Timer.periodic(
-        oneSec,
+        oneMilSec,
         (Timer timer) {
           setState(() {
             ms++;
