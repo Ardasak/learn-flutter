@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_widgets/basic_button_types.dart';
+import 'package:flutter_basic_widgets/dropdown_button_usage.dart';
 import 'package:flutter_basic_widgets/image_widgets.dart';
 import 'package:flutter_basic_widgets/my_counter_page.dart';
 
@@ -16,14 +18,18 @@ class myApp extends StatelessWidget {
     return MaterialApp(
       title: "My Counter App",
       theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: Colors.red,
+          outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(primary: Colors.blue.shade700)),
           textTheme: TextTheme(
               headline1: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.purple))),
-      home: Scaffold(appBar: AppBar(title: Text("Image Widget"),),
-      body: ImageWidget(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Image Widget"),
+        ),
+        body: DropdownButtonUsage(),
       ),
     );
   }
