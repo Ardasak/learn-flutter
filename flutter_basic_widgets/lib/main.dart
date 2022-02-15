@@ -3,6 +3,7 @@ import 'package:flutter_basic_widgets/basic_button_types.dart';
 import 'package:flutter_basic_widgets/dropdown_button_usage.dart';
 import 'package:flutter_basic_widgets/image_widgets.dart';
 import 'package:flutter_basic_widgets/my_counter_page.dart';
+import 'package:flutter_basic_widgets/popup_menu.dart';
 
 void main() {
   debugPrint("main calisti");
@@ -29,7 +30,7 @@ class myApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Image Widget"),
         ),
-        body: DropdownButtonUsage(),
+        body: PopUpMenu(),
       ),
     );
   }
