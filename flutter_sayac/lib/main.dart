@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -37,7 +36,7 @@ class _homePageState extends State<homePage> {
   late Timer _timer;
   void _start() {
     setState(() {
-      const oneMilSec = const Duration(milliseconds: 1);
+      const oneMilSec = const Duration(milliseconds: 10);
       _timer = Timer.periodic(
         oneMilSec,
         (Timer timer) {
