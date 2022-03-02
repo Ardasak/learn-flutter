@@ -29,6 +29,7 @@ class _myUIState extends State<myUI> {
                 onSubmitted: (value) {
                   setState(() {
                     myList.add(value);
+                    _controller.clear();
                   });
                 },
               ),
