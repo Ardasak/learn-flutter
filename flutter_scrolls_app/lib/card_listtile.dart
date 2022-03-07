@@ -10,30 +10,34 @@ class CardAndListTileUsage extends StatelessWidget {
         title: Text("Card and ListTile"),
       ),
       body: Center(
-        child: ListView(
-          reverse: true,
-          children: [
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            CardMethod(),
-            Text("Selam"),
-            ElevatedButton.icon(
-                onPressed: () {}, icon: Icon(Icons.add), label: Text("Selam"))
-          ],
-        ),
+        child: SingleChildScrollUsage(),
       ),
     );
+  }
+
+  ListView ListViewUsage() {
+    return ListView(
+        reverse: true,
+        children: [
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          CardMethod(),
+          Text("Selam"),
+          ElevatedButton.icon(
+              onPressed: () {}, icon: Icon(Icons.add), label: Text("Selam"))
+        ],
+      );
   }
 
   SingleChildScrollView SingleChildScrollUsage() {
