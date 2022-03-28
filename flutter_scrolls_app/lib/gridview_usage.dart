@@ -1,4 +1,8 @@
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class GridViewUsage extends StatelessWidget {
   const GridViewUsage({Key? key}) : super(key: key);
@@ -7,24 +11,24 @@ class GridViewUsage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "GridView Usage",
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.code),
+            icon: const Icon(Icons.code),
             onPressed: () => null,
             iconSize: 25,
           ),
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () => null,
             iconSize: 25,
           ),
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             onPressed: () => null,
             iconSize: 25,
           ),
@@ -39,13 +43,69 @@ class GridViewUsage extends StatelessWidget {
 
   GridView GridViewBuilder() {
     return GridView.builder(
-        itemCount: 201,
+        itemCount: 11,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) {
-          return Container(
-            color: Colors.teal[100 * (index % 9)],
-            child: Text("$index"),
+          return GestureDetector(
+            onTap: () => EasyLoading.showSuccess("$index tıklandı."),
+            onLongPress: () => EasyLoading.showSuccess("$index uzun basıldı."),
+            onDoubleTap: () => EasyLoading.showSuccess("$index çift tıklandı."),
+            onHorizontalDragEnd: (details) =>
+                EasyLoading.showSuccess("$index horizontal kaydırıldı."),
+            onVerticalDragEnd: (details) =>
+                EasyLoading.showSuccess("$index vertical kaydırıldı."),
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    blurRadius: 10,
+                    spreadRadius: 5,
+                  )
+                ],
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.5),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      "https://i.ytimg.com/vi/xEuX6HCUFWI/maxresdefault.jpg"),
+                  fit: BoxFit.cover,
+                ),
+                gradient: LinearGradient(colors: [
+                  Colors.blue,
+                  Colors.red.shade100,
+                  Colors.orange.shade200,
+                  Colors.purple.shade300,
+                  Colors.teal.shade400,
+                  Colors.amber.shade500,
+                  Colors.cyan.shade600,
+                  Colors.black,
+                  Colors.white,
+                  Colors.brown.shade900,
+                ], begin: Alignment(-0.5, -0.5), end: Alignment(0.5, 0.5)),
+                shape: BoxShape.rectangle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "$index",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           );
         });
   }
@@ -56,17 +116,17 @@ class GridViewUsage extends StatelessWidget {
       crossAxisCount: 3,
       primary: false,
       reverse: false,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       crossAxisSpacing: 20,
       mainAxisSpacing: 40,
       children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: Colors.orange.shade100,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             "Merhaba Flutter 1",
             textAlign: TextAlign.center,
           ),
@@ -74,22 +134,22 @@ class GridViewUsage extends StatelessWidget {
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade200,
-          child: Text("Merhaba Flutter 2"),
+          child: const Text("Merhaba Flutter 2"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade300,
-          child: Text("Merhaba Flutter 3"),
+          child: const Text("Merhaba Flutter 3"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade400,
-          child: Text("Merhaba Flutter 4"),
+          child: const Text("Merhaba Flutter 4"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade100,
-          child: Text("Merhaba Flutter 5"),
+          child: const Text("Merhaba Flutter 5"),
         ),
       ],
     );
@@ -101,17 +161,17 @@ class GridViewUsage extends StatelessWidget {
       maxCrossAxisExtent: 150,
       primary: false,
       reverse: false,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       crossAxisSpacing: 20,
       mainAxisSpacing: 40,
       children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: Colors.orange.shade100,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: const BorderRadius.all(const Radius.circular(20))),
           alignment: Alignment.center,
-          child: Text(
+          child: const Text(
             "Merhaba Flutter 1",
             textAlign: TextAlign.center,
           ),
@@ -119,22 +179,22 @@ class GridViewUsage extends StatelessWidget {
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade200,
-          child: Text("Merhaba Flutter 2"),
+          child: const Text("Merhaba Flutter 2"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade300,
-          child: Text("Merhaba Flutter 3"),
+          child: const Text("Merhaba Flutter 3"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade400,
-          child: Text("Merhaba Flutter 4"),
+          child: const Text("Merhaba Flutter 4"),
         ),
         Container(
           alignment: Alignment.center,
           color: Colors.orange.shade100,
-          child: Text("Merhaba Flutter 5"),
+          child: const Text("Merhaba Flutter 5"),
         ),
       ],
     );
