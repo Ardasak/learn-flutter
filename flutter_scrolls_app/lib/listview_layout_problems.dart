@@ -5,6 +5,7 @@ class ListviewLayoutProblems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController _controller = ScrollController();
     return Scaffold(
       appBar: AppBar(title: Text("Listview Layout Problems")),
       body: Container(
@@ -14,13 +15,22 @@ class ListviewLayoutProblems extends StatelessWidget {
             Text("Başladı"),
             Expanded(
               child: ListView(
+                controller: _controller,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 reverse: true,
                 children: [
-                  Container(
-                    width: 200,
-                    color: Colors.orange.shade200,
+                  GestureDetector(
+                    onTap: () {
+                      _controller.animateTo(300,
+                          duration: Duration(seconds: 2),
+                          curve: Curves.slowMiddle);
+                      debugPrint("basti");
+                    },
+                    child: Container(
+                      width: 200,
+                      color: Colors.orange.shade200,
+                    ),
                   ),
                   Container(
                     width: 200,

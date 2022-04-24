@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_scrolls_app/card_listtile.dart';
+import 'package:flutter_scrolls_app/custom_scroll_view.dart';
 import 'package:flutter_scrolls_app/gridview_usage.dart';
 import 'package:flutter_scrolls_app/listview_layout_problems.dart';
 import 'package:flutter_scrolls_app/listview_usage.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: GridViewUsage(),
+      home: CustomScrollViewUsage(),
       builder: EasyLoading.init(),
     );
   }
