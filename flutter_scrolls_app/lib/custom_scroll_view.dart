@@ -35,7 +35,7 @@ class _CustomScrollViewUsage1State extends State<CustomScrollViewUsage1> {
             pinned: false,
           ),
           SliverList(
-            delegate: SliverChildListDelegate(fixedList),
+            delegate: SliverChildListDelegate(fixedList()),
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate(_DynamicItemProduction,
@@ -45,7 +45,7 @@ class _CustomScrollViewUsage1State extends State<CustomScrollViewUsage1> {
     );
   }
 
-  List<Widget> get fixedList {
+  List<Widget> fixedList() {
     return [
       Container(
         height: 150,
@@ -140,15 +140,15 @@ class CustomScrollViewUsage extends StatelessWidget {
           SliverAppBar(
             backgroundColor: Colors.pinkAccent,
             expandedHeight: 196,
-            floating: true,
-            snap: true,
+            floating: false,
+            snap: false,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text("Flexible Space Bar"),
+              title: Text("Sliver App Bar"),
               centerTitle: true,
               background: Image.network(
                   "https://i.ytimg.com/vi/xEuX6HCUFWI/maxresdefault.jpg"),
             ),
-            pinned: false,
+            pinned: true,
           ),
           SliverPadding(
             padding: EdgeInsets.all(8),
@@ -156,6 +156,29 @@ class CustomScrollViewUsage extends StatelessWidget {
               delegate: SliverChildListDelegate(fixedList),
             ),
           ),
+          SliverGrid(
+            delegate: SliverChildListDelegate(fixedList),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 2.0),
+          ),
+          SliverGrid(
+              delegate: SliverChildBuilderDelegate(_DynamicItemProduction,
+                  childCount: 6),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 400,
+                  mainAxisExtent: 100,
+                  childAspectRatio: 3.0)),
+          SliverGrid(
+              delegate: SliverChildBuilderDelegate(_DynamicItemProduction,
+                  childCount: 6),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200)),
+          SliverGrid.count(
+              crossAxisCount: 2, childAspectRatio: 2.0, children: fixedList),
+          SliverGrid.extent(
+              maxCrossAxisExtent: 300,
+              childAspectRatio: 2.0,
+              children: fixedList),
           SliverPadding(
             padding: EdgeInsets.all(16),
             sliver: SliverList(
