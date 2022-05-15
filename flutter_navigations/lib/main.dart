@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_navigations/red_page.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'orange_page.dart';
 import 'dart:io' show Platform;
@@ -16,7 +17,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Material App Bar",
-      home: MainPage(),
+      // home: MainPage(),
+      builder: EasyLoading.init(),
+      routes: {
+        '/red': (context) => RedPage(),
+        '/orange': (context) => OrangePage(),
+        '/': (context) => MainPage(),
+      },
+      onUnknownRoute: (settings) => MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: Text("Unknown Route"),
+            backgroundColor: Colors.red,
+          ),
+          body: Center(child: Text("404")),
+        ),
+      ),
     );
   }
 }
@@ -68,7 +84,52 @@ class MainPage extends StatelessWidget {
                 ),
                 style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
               ),
-            )
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).maybePop();
+                },
+                child: Text("Maybe Pop Kullanımı"),
+                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (Navigator.of(context).canPop()) {
+                    debugPrint("Can pop");
+                  } else {
+                    debugPrint("Can't pop");
+                  }
+                },
+                child: Text("Can Pop Kullanımı"),
+                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => OrangePage()));
+                },
+                child: Text("Push Replacement Kullanımı"),
+                style: ElevatedButton.styleFrom(fixedSize: Size(120, 60)),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/orange');
+                },
+                child: Text("PushNamed Kullanımı"),
+                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+              ),
+            ),
           ],
         )));
   }
