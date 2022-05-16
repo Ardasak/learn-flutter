@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_navigations/red_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_navigations/route_generator.dart';
 
 import 'orange_page.dart';
 import 'dart:io' show Platform;
@@ -19,20 +20,21 @@ class MyApp extends StatelessWidget {
       title: "Material App Bar",
       // home: MainPage(),
       builder: EasyLoading.init(),
-      routes: {
-        '/red': (context) => RedPage(),
-        '/orange': (context) => OrangePage(),
-        '/': (context) => MainPage(),
-      },
-      onUnknownRoute: (settings) => MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: Text("Unknown Route"),
-            backgroundColor: Colors.red,
-          ),
-          body: Center(child: Text("404")),
-        ),
-      ),
+      // routes: {
+      //   '/red': (context) => RedPage(),
+      //   '/orange': (context) => OrangePage(),
+      //   '/': (context) => MainPage(),
+      // },
+      // onUnknownRoute: (settings) => MaterialPageRoute(
+      //   builder: (context) => Scaffold(
+      //     appBar: AppBar(
+      //       title: Text("Unknown Route"),
+      //       backgroundColor: Colors.red,
+      //     ),
+      //     body: Center(child: Text("404")),
+      //   ),
+      // ),
+      onGenerateRoute: RouteGenerator.routeGenerator,
     );
   }
 }
@@ -129,6 +131,21 @@ class MainPage extends StatelessWidget {
                 child: Text("PushNamed Kullanımı"),
                 style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
               ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/yellow');
+                  },
+                  child: Text(
+                    "PushNamed Kullanımı",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(120, 50),
+                    primary: Colors.yellow,
+                  )),
             ),
           ],
         )));

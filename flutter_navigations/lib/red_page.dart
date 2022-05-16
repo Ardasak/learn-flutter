@@ -45,7 +45,7 @@ class RedPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, "/orange2");
+                Navigator.pushReplacementNamed(context, "/orange");
               },
               child: Text("Go to orange"),
               style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
