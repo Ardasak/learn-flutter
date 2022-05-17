@@ -147,6 +147,16 @@ class MainPage extends StatelessWidget {
                     primary: Colors.yellow,
                   )),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/studentList', arguments: 60);
+                },
+                child: Text("Create List"),
+                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+              ),
+            ),
           ],
         )));
   }
