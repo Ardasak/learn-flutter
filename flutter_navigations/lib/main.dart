@@ -44,120 +44,136 @@ class MainPage extends StatelessWidget {
   int? _gelenSayi = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Navigation Islemleri'),
-        ),
-        body: Center(
-            child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () async {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => RedPage()));
-
-                  if (Platform.isAndroid) {
-                    await Navigator.of(context)
-                        .push<int>(MaterialPageRoute(
-                            builder: (redContext) => RedPage()))
-                        .then((int? value) {
-                      _gelenSayi = value;
-                      debugPrint('Gelen sayı: $value');
-                    });
-                  } else if (Platform.isIOS) {
-                    await Navigator.of(context)
-                        .push<int>(CupertinoPageRoute(
-                            builder: (redContext) => RedPage()))
-                        .then((int? value) {
-                      _gelenSayi = value;
-                      debugPrint('Gelen sayı: $value');
-                      ;
-                    });
-                  }
-
-                  print(_gelenSayi);
-                },
-                child: Icon(
-                  Icons.abc,
-                  color: Colors.red,
-                  size: 48,
-                ),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).maybePop();
-                },
-                child: Text("Maybe Pop Kullanımı"),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (Navigator.of(context).canPop()) {
-                    debugPrint("Can pop");
-                  } else {
-                    debugPrint("Can't pop");
-                  }
-                },
-                child: Text("Can Pop Kullanımı"),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => OrangePage()));
-                },
-                child: Text("Push Replacement Kullanımı"),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 60)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/orange');
-                },
-                child: Text("PushNamed Kullanımı"),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/yellow');
+    return WillPopScope(
+      onWillPop: () {
+        EasyLoading.showError("You can't leave this app.", duration: Duration(seconds: 2), dismissOnTap: false);
+        return Future.value(false);
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('Navigation Islemleri'),
+          ),
+          body: Center(
+              child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => RedPage()));
+    
+                    if (Platform.isAndroid) {
+                      await Navigator.of(context)
+                          .push<int>(MaterialPageRoute(
+                              builder: (redContext) => RedPage()))
+                          .then((int? value) {
+                        _gelenSayi = value;
+                        debugPrint('Gelen sayı: $value');
+                      });
+                    } else if (Platform.isIOS) {
+                      await Navigator.of(context)
+                          .push<int>(CupertinoPageRoute(
+                              builder: (redContext) => RedPage()))
+                          .then((int? value) {
+                        _gelenSayi = value;
+                        debugPrint('Gelen sayı: $value');
+                        ;
+                      });
+                    }
+    
+                    print(_gelenSayi);
                   },
-                  child: Text(
-                    "PushNamed Kullanımı",
-                    style: TextStyle(color: Colors.black),
+                  child: Icon(
+                    Icons.abc,
+                    color: Colors.red,
+                    size: 48,
                   ),
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(120, 50),
-                    primary: Colors.yellow,
-                  )),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/studentList', arguments: 60);
-                },
-                child: Text("Create List"),
-                style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
               ),
-            ),
-          ],
-        )));
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).maybePop();
+                  },
+                  child: Text("Maybe Pop Kullanımı"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (Navigator.of(context).canPop()) {
+                      debugPrint("Can pop");
+                    } else {
+                      debugPrint("Can't pop");
+                    }
+                  },
+                  child: Text("Can Pop Kullanımı"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => OrangePage()));
+                  },
+                  child: Text("Push Replacement Kullanımı"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 60)),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/orange');
+                  },
+                  child: Text("PushNamed Kullanımı"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/yellow');
+                    },
+                    child: Text(
+                      "PushNamed Kullanımı",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(120, 50),
+                      primary: Colors.yellow,
+                    )),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/studentList', arguments: 60);
+                  },
+                  child: Text("Create List"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/purple', arguments: 60);
+                  },
+                  child: Text("Go to purple"),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(120, 50)),
+                ),
+              ),
+            ],
+          ))),
+    );
   }
 }

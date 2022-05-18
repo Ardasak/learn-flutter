@@ -9,8 +9,8 @@ class StudentList extends StatelessWidget {
     List<Student> allStudents = List.generate(itemCount, (index) {
       return Student(
         index,
-        'Student $index',
-        "$index + 1",
+        '$index',
+        "$index",
       );
     });
     print("eleman sayısı: $itemCount");
@@ -20,10 +20,15 @@ class StudentList extends StatelessWidget {
         ),
         body: ListView.builder(
           itemBuilder: (context, index) => ListTile(
+            onTap: (){
+              var selected = allStudents[index];
+              Navigator.of(context).pushNamed("/studentDetail", arguments: selected);
+            },
             leading: CircleAvatar(
               child: Text(allStudents[index].id.toString()),
             ),
-            title: Text(allStudents[index].name),
+            title: Text("Name: " + allStudents[index].name),
+            subtitle: Text("Surname: " + allStudents[index].surname),
           ),
           itemCount: itemCount,
         ));

@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_navigations/main.dart';
 import 'package:flutter_navigations/orange_page.dart';
+import 'package:flutter_navigations/purple_page.dart';
 import 'package:flutter_navigations/red_page.dart';
 import 'package:flutter_navigations/student_list.dart';
+import 'package:flutter_navigations/student_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> _getRoute(Widget page, RouteSettings settings) =>
@@ -24,6 +26,11 @@ class RouteGenerator {
         print(settings.name);
         print(settings.arguments);
         return _getRoute(StudentList(), settings);
+      case '/studentDetail':
+        var selected = settings.arguments as Student;
+        return _getRoute(studentDetail(selectedStudent: selected), settings);
+      case '/purple':
+        return _getRoute(PurplePage(), settings);
       default:
         return _getRoute(Scaffold(
           appBar: AppBar(
