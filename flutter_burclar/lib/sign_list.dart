@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_burclar/data/strings.dart';
-import 'package:flutter_burclar/model/burc.dart';
+import 'package:flutter_burclar/model/sign.dart';
 import 'package:flutter_burclar/sign_item.dart';
 
 class SignList extends StatelessWidget {

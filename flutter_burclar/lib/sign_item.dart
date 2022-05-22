@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burclar/model/burc.dart';
+import 'package:flutter_burclar/model/sign.dart';
 
-import 'burc_detay.dart';
+import 'sign_detail.dart';
 
 class SignItem extends StatelessWidget {
   final Sign listedSign;
@@ -13,7 +13,7 @@ class SignItem extends StatelessWidget {
     return Card(
       elevation: 4,
       child: ListTile(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignDetail(selectedSign: listedSign))),
+        onTap: () => Navigator.of(context).pushNamed("/detail", arguments: listedSign),
         leading: Image.asset("images/" + listedSign.signSmallImage, width: 64, height: 64,),
         title: Text(listedSign.signName, style: textStyle.headline6,),
         subtitle: Text(listedSign.signDate, style: textStyle.subtitle2,),
