@@ -4,9 +4,43 @@ void main() {
   runApp(MyApp(title: "Form İşlemleri"));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final String title;
   const MyApp({Key? key, required this.title}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
+  int maxLine = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: "test@test.com");
+    _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      setState(() {});
+      if(_focusNode.hasFocus){
+        maxLine = 3;
+      }
+      else{
+        maxLine = 1;
+      }
+            
+    });
+    
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +48,23 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         
-        appBar: AppBar(title: Text(title)),
+        appBar: AppBar(title: Text(widget.title)),
         body: Column(
           children: [Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              focusNode: _focusNode,
+              controller: _controller,
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.search,
               autofocus: true,
-              maxLines: 1,
-              maxLength: 8,
-              onChanged: (String deger) => print(deger + "basıldı."),
+              maxLines: maxLine,
+              maxLength: 35,
+              onChanged: (String deger) {setState((){
+                _controller.value = TextEditingValue(
+                  text: deger, 
+                  selection: TextSelection.collapsed(offset: deger.length));
+                  });},
               cursorColor: Colors.purple,
               decoration: InputDecoration(
                 labelText: "Test",
@@ -40,6 +80,10 @@ class MyApp extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: Text(_controller.text),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: TextField(
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.search,
@@ -48,7 +92,10 @@ class MyApp extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-    
+            _controller.text = "ardasak434@gmail.com";
+            setState(() {
+              
+            });
           },
           child: Icon(Icons.edit)
           ,),
