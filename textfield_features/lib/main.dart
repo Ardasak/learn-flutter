@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:textfield_features/text_form_field_usage.dart';
 
 void main() {
   runApp(MyApp(title: "Form İşlemleri"));
@@ -46,60 +47,64 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        
-        appBar: AppBar(title: Text(widget.title)),
-        body: Column(
-          children: [Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              focusNode: _focusNode,
-              controller: _controller,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.search,
-              autofocus: true,
-              maxLines: maxLine,
-              maxLength: 35,
-              onChanged: (String deger) {setState((){
-                _controller.value = TextEditingValue(
-                  text: deger, 
-                  selection: TextSelection.collapsed(offset: deger.length));
-                  });},
-              cursorColor: Colors.purple,
-              decoration: InputDecoration(
-                labelText: "Test",
-                hintText: "Email Giriniz.",
-                icon: Icon(Icons.email),
-                prefixIcon: Icon(Icons.email_outlined),
-                suffixIcon: Icon(Icons.email_rounded),
-                border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
-                filled: true,
-                fillColor: Colors.orange
-              ),
+      home: TextFormFieldUsage(),
+    );
+  }
+
+  Scaffold TextFieldUsage() {
+    return Scaffold(
+      
+      appBar: AppBar(title: Text(widget.title)),
+      body: Column(
+        children: [Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            focusNode: _focusNode,
+            controller: _controller,
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.search,
+            autofocus: true,
+            maxLines: maxLine,
+            maxLength: 35,
+            onChanged: (String deger) {setState((){
+              _controller.value = TextEditingValue(
+                text: deger, 
+                selection: TextSelection.collapsed(offset: deger.length));
+                });},
+            cursorColor: Colors.purple,
+            decoration: InputDecoration(
+              labelText: "Test",
+              hintText: "Email Giriniz.",
+              icon: Icon(Icons.email),
+              prefixIcon: Icon(Icons.email_outlined),
+              suffixIcon: Icon(Icons.email_rounded),
+              border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+              filled: true,
+              fillColor: Colors.orange
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(_controller.text),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.search,
-            ),
-          )],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            _controller.text = "ardasak434@gmail.com";
-            setState(() {
-              
-            });
-          },
-          child: Icon(Icons.edit)
-          ,),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(_controller.text),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.search,
+          ),
+        )],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          _controller.text = "ardasak434@gmail.com";
+          setState(() {
+            
+          });
+        },
+        child: Icon(Icons.edit)
+        ,),
     );
   }
 }
