@@ -9,6 +9,12 @@ class TextFormFieldUsage extends StatefulWidget {
 }
 
 class _TextFormFieldUsageState extends State<TextFormFieldUsage> {
+  String _email = "", _password = "", _username = "";
+  final _formKey = GlobalKey<FormState>();
+
+  IconData current_icon = Icons.visibility_off;
+  bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +23,15 @@ class _TextFormFieldUsageState extends State<TextFormFieldUsage> {
           child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
+          key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               TextFormField(
-                  initialValue: "Ardasak",
                   keyboardType: TextInputType.name,
+                  onSaved: (deger){
+                    _username = deger!;
+                  },
                   decoration: InputDecoration(
                     labelText: "Username",
                     hintText: "Username",
@@ -41,20 +50,22 @@ class _TextFormFieldUsageState extends State<TextFormFieldUsage> {
                     height: 10,
                   ),
               TextFormField(
-                initialValue: "ardasak434@gmail.com",
                   keyboardType: TextInputType.emailAddress,
+                  onSaved: (deger){
+                    _email = deger!;
+                  },
                   decoration: InputDecoration(
-                    errorStyle: TextStyle(color: Colors.orange),
-                    errorBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(0))),
                     labelText: "Email",
                     hintText: "Email",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(50))),
                   ),
                   validator: (deger){
-                    if(EmailValidator.validate(deger!)){
+                    if(deger!.isEmpty){
+                      return "Email can not be empty.";
+                    } else if(EmailValidator.validate(deger)){
                       return null;
-                    }else{
+                    } else{
                       return "Email is invalid.";
                     }
                     
@@ -62,8 +73,28 @@ class _TextFormFieldUsageState extends State<TextFormFieldUsage> {
               ),
               SizedBox(height: 10,),
               TextFormField(
-                  keyboardType: TextInputType.visiblePassword,
+                obscureText: _obscureText,
+                  keyboardType: TextInputType.text,
+                  onSaved: (deger){
+                    _password = deger!;
+                  },
+                  
                   decoration: InputDecoration(
+                    suffix: IconButton(icon: Icon(current_icon,), onPressed: (){
+                      if(current_icon == Icons.visibility_off){
+                        current_icon = Icons.visibility;
+                        _obscureText = false;
+                        
+                      }
+                      else{
+                        current_icon = Icons.visibility_off;
+                        _obscureText = true;
+                      }
+                      setState(() {
+                        
+                      });
+                    },
+                    ),
                     labelText: "Password",
                     hintText: "Password",
                     border: OutlineInputBorder(
@@ -78,7 +109,16 @@ class _TextFormFieldUsageState extends State<TextFormFieldUsage> {
                     
                   },
               ),
-              TextFormField(),
+              SizedBox(height: 10,),
+              ElevatedButton(onPressed: (){
+                if(_formKey.currentState!.validate()){
+                  _formKey.currentState!.save();
+                }
+                String result = "Username: $_username \nEmail: $_email \nPassword: $_password";
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result, style: TextStyle(fontSize: 15),)));
+                _formKey.currentState!.reset();
+              }, 
+              child: Text("Confirm"))
             ],
           ),
         ),
