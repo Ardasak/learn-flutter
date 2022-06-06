@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:textfield_features/date_time_picker.dart';
 import 'package:textfield_features/global_key_usage.dart';
 import 'package:textfield_features/other_form_items.dart';
+import 'package:textfield_features/stepper.dart';
 import 'package:textfield_features/text_form_field_usage.dart';
 
 void main() {
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DateTimeExample(),
+      home: StepperUsage(),
     );
   }
 
