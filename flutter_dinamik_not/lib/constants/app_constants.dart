@@ -9,7 +9,7 @@ class Constants {
     fontWeight: FontWeight.bold,
     color: primaryColor,
   );
-  static final BorderRadius textFieldBorderRadius = BorderRadius.circular(24);
+  static final BorderRadius textFieldBorderRadius = BorderRadius.circular(16);
 
   static final TextStyle showAverageStyle = GoogleFonts.quicksand(
     fontSize: 16,
@@ -21,4 +21,8 @@ class Constants {
     fontWeight: FontWeight.w800,
     color: primaryColor,
   );
+
+  static final dropDownPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+
+  static final paddingHorizontal8 = EdgeInsets.symmetric(horizontal: 8);
 }
