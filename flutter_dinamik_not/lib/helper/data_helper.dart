@@ -30,7 +30,7 @@ class DataHelper{
             .toList();
   }
 
-  static List<int> allCredits = List.generate(10, (index) => index + 1);
+  static List<double> allCredits = List.generate(10, (index) => index + 1);
 
-  static List<DropdownMenuItem<int>> allCreditItems = List.generate(allCredits.length, (index) => DropdownMenuItem(child: Text(allCredits[index].toString()), value: allCredits[index],));
+  static List<DropdownMenuItem<double>> allCreditItems = List.generate(allCredits.length, (index) => DropdownMenuItem(child: Text(allCredits[index].toString()), value: allCredits[index],));
 }

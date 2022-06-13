@@ -5,13 +5,17 @@ import 'package:flutter_dinamik_not/model/subject.dart';
 import '../constants/app_constants.dart';
 
 class SubjectList extends StatefulWidget {
-  const SubjectList({Key? key}) : super(key: key);
+  final Function onDismiss;
+  const SubjectList({required this.onDismiss, Key? key}) : super(key: key);
 
   @override
-  State<SubjectList> createState() => _SubjectListState();
+  State<SubjectList> createState() => _SubjectListState(onDismiss: this.onDismiss);
 }
 
 class _SubjectListState extends State<SubjectList> {
+  late final Function onDismiss;
+
+  _SubjectListState({required this.onDismiss});
   @override
   Widget build(BuildContext context) {
     List<Subject> allSubjects = DataHelper.allAddedSubjects;
@@ -22,10 +26,7 @@ class _SubjectListState extends State<SubjectList> {
             key: UniqueKey(),
             direction: DismissDirection.startToEnd,
             onDismissed: (direction){
-              DataHelper.allAddedSubjects.removeAt(index);
-              setState(() {
-                
-              });
+              onDismiss(index);
             },
             child: Padding(
               padding: EdgeInsets.all(8),

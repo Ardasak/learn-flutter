@@ -22,7 +22,7 @@ class Constants {
     color: primaryColor,
   );
 
-  static final dropDownPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+  static final dropDownPadding = EdgeInsets.symmetric(horizontal: 12, vertical: 8);
 
   static final paddingHorizontal8 = EdgeInsets.symmetric(horizontal: 8);
 }

@@ -1,7 +1,7 @@
 class Subject{
   final String name;
   final double letter;
-  final int credit;
+  final double credit;
 
   Subject({required this.name, required this.letter, required this.credit});
 

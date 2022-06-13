@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dinamik_not/constants/app_constants.dart';
 import 'package:flutter_dinamik_not/helper/data_helper.dart';
 import 'package:flutter_dinamik_not/model/subject.dart';
+import 'package:flutter_dinamik_not/widgets/dropdown_widget.dart';
 import 'package:flutter_dinamik_not/widgets/show_average_page.dart';
 import 'package:flutter_dinamik_not/widgets/subject_list.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,9 +17,8 @@ class CalculateAveragePage extends StatefulWidget {
 class _CalculateAveragePageState extends State<CalculateAveragePage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   double selectedLetterValue = 4;
-  int selectedCreditValue = 1;
+  double selectedCreditValue = 1;
   String lessonNameEntry = "";
-  double average = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +44,19 @@ class _CalculateAveragePageState extends State<CalculateAveragePage> {
                 ),
                 Expanded(
                   flex: 4,
-                  child: ShowAverage(subjectCount: DataHelper.allAddedSubjects.length, average: average),
+                  child: ShowAverage(subjectCount: DataHelper.allAddedSubjects.length, average: DataHelper.calculateAverage()),
                 )
               ],
             ),
             Expanded(
-              child: SubjectList(),
+              child: SubjectList(
+                onDismiss: (index){
+                  DataHelper.allAddedSubjects.removeAt(index);
+                  setState(() {
+                    
+                  });
+                },
+              ),
             )
           ],
         ));
@@ -94,26 +101,9 @@ class _CalculateAveragePageState extends State<CalculateAveragePage> {
         ],
       ));
 
-  get _buildLetters => Container(
-      alignment: Alignment.center,
-      padding: Constants.dropDownPadding,
-      decoration: BoxDecoration(
-        color: Constants.primaryColor.shade100.withOpacity(0.3),
-        borderRadius: Constants.textFieldBorderRadius,
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<double>(
-          elevation: 16,
-          value: selectedLetterValue,
-          items: DataHelper.returnList(),
-          onChanged: (value) {
-            setState(() {
-              selectedLetterValue = value!;
-              debugPrint(value.toString());
-            });
-          },
-        ),
-      ));
+  get _buildLetters => DropdownWidget(items: DataHelper.returnList(), defaultSelected: selectedLetterValue, onChanged: (value){
+    selectedLetterValue = value;
+  },);
 
   get _buildTextFormField => TextFormField(
         onSaved: ((newValue) => setState(() {
@@ -133,33 +123,15 @@ class _CalculateAveragePageState extends State<CalculateAveragePage> {
             fillColor: Constants.primaryColor.shade100.withOpacity(0.3)),
       );
 
-  get _buildCredits => Container(
-      alignment: Alignment.center,
-      padding: Constants.dropDownPadding,
-      decoration: BoxDecoration(
-        color: Constants.primaryColor.shade100.withOpacity(0.3),
-        borderRadius: Constants.textFieldBorderRadius,
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<int>(
-          elevation: 16,
-          value: selectedCreditValue,
-          items: DataHelper.allCreditItems,
-          onChanged: (value) {
-            setState(() {
-              selectedCreditValue = value!;
-              debugPrint(value.toString());
-            });
-          },
-        ),
-      ));
+  get _buildCredits => DropdownWidget(items: DataHelper.allCreditItems, defaultSelected: selectedCreditValue, onChanged: (value){
+    selectedCreditValue = value;
+  },);
 
   void _addSubjectAndCalculateAverage() {
     if(formKey.currentState!.validate()){
       formKey.currentState!.save();
       var subject = Subject(name: lessonNameEntry, letter: selectedLetterValue, credit: selectedCreditValue);
       DataHelper.addSubject(subject);
-      average = DataHelper.calculateAverage();
       setState(() {
         
       });
