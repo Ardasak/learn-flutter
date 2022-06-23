@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -136,9 +135,22 @@ class _homePageState extends State<homePage> {
                       return Card(
                         child: ListTile(
                           onLongPress: () {
-                            setState(() {
-                              lap_list.remove(lap_list[index]);
-                            });
+                            showDialog(context: context, builder: (context) => AlertDialog(
+                              title: Text("Warning"),
+                              content: Text("Are you sure you want to remove that?"),
+                              actions: [
+                                ElevatedButton(onPressed: (){
+                                  lap_list.remove(lap_list[index]);
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    
+                                  });
+                                }, child: Text("Yes")),
+                                TextButton(onPressed: (){
+                                  Navigator.of(context).pop();
+                                }, child: Text("No"))
+                              ],
+                            ));
                           },
                           title: Text(lap_list[index]),
                           leading: Icon(
