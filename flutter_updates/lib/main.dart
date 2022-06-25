@@ -33,10 +33,13 @@ class _MyHomePageState extends State<MyHomePage> {
   late MainPage mainPage;
   late SearchPage searchPage;
 
+  var keyAnaSayfa = PageStorageKey("key_ana_sayfa");
+  var keyAramaSayfa = PageStorageKey("key_arama_sayfa");
+ 
   @override
   void initState() {
-    mainPage = MainPage();
-    searchPage = SearchPage();
+    mainPage = MainPage(key: keyAnaSayfa,);
+    searchPage = SearchPage(key: keyAramaSayfa,);
     allPages = [mainPage, searchPage];
     super.initState();
   }
