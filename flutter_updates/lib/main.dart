@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_updates/custom_font_usage.dart';
 import 'package:flutter_updates/drawer.dart';
 import 'package:flutter_updates/ui/main_menu.dart';
+import 'package:flutter_updates/ui/pageview.dart';
 import 'package:flutter_updates/ui/search_page.dart';
+import 'package:flutter_updates/ui/tabs.dart';
 
 class FlutterPart2 extends StatelessWidget {
   const FlutterPart2({Key? key}) : super(key: key);
@@ -32,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late List<Widget> allPages;
   late MainPage mainPage;
   late SearchPage searchPage;
+  late PageViewExample pageViewExample;
 
   var keyAnaSayfa = PageStorageKey("key_ana_sayfa");
   var keyAramaSayfa = PageStorageKey("key_arama_sayfa");
@@ -41,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     mainPage = MainPage(key: keyAnaSayfa,);
     searchPage = SearchPage(key: keyAramaSayfa,);
     allPages = [mainPage, searchPage];
+    pageViewExample = PageViewExample();
     super.initState();
   }
 
@@ -54,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: ternary_try_catch((){
           allPages.contains(allPages[selectedMenuItem]);
-        }) ? allPages[selectedMenuItem] : allPages[0]);
+        }) ? allPages[selectedMenuItem] : pageViewExample);
   }
 
   BottomNavigationBar BottomNavMenu() {
@@ -83,6 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         onTap: (value) {
           selectedMenuItem = value;
+          if(value == 3){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => TabExample())).then((value) => setState((){selectedMenuItem = 0;}));
+          }
           setState(() {});
         },
         backgroundColor: Colors.cyan.shade800,
