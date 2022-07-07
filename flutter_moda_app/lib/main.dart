@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_moda_app/detay.dart';
 
 void main() => runApp(const ModaApp());
 
@@ -12,6 +13,7 @@ class ModaApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainPage(),
+      theme: ThemeData().copyWith(splashColor: Colors.red),
     );
   }
 }
@@ -23,10 +25,61 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    tabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Material(
+        color: Colors.white,
+        child: TabBar(
+            indicatorColor: Colors.transparent,
+            controller: tabController,
+            tabs: [
+              Tab(
+                icon: Icon(
+                  Icons.more,
+                  color: Colors.grey,
+                  size: 22,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.play_arrow,
+                  color: Colors.grey,
+                  size: 22,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.navigation,
+                  color: Colors.grey,
+                  size: 22,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.supervised_user_circle,
+                  color: Colors.grey,
+                  size: 22,
+                ),
+              )
+            ]),
+      ),
       appBar: AppBar(
         actions: [
           IconButton(
@@ -88,10 +141,9 @@ class _MainPageState extends State<MainPage> {
           child: Material(
             elevation: 4,
             borderRadius: BorderRadius.circular(16),
-            color: Colors.blue.shade300,
             child: Container(
               padding: EdgeInsets.all(16),
-              height: 450,
+              height: 500,
               width: double.infinity,
               child: Column(children: [
                 Row(
@@ -111,26 +163,219 @@ class _MainPageState extends State<MainPage> {
                     Container(
                       width: MediaQuery.of(context).size.width - 160,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                        Text(
-                          "Daisy",
-                          style: TextStyle(fontFamily: 'CustomFont', fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "34 mins ago",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontFamily: "CustomFont",
-                              fontSize: 10),
-                        )
-                      ]),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Daisy",
+                              style: TextStyle(
+                                  fontFamily: 'CustomFont',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "34 mins ago",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontFamily: "CustomFont",
+                                  fontSize: 10),
+                            )
+                          ]),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Icon(
                       Icons.more_vert,
                       color: Colors.grey,
                       size: 22,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "This official website features a ribbed knit jacket that is modern"
+                  "and stylish. It looks very temparament and is recommended to everyone.",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: "CustomFont",
+                      color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => Detail(
+                                  imgPath: "assets/modelgrid1.jpeg",
+                                ))));
+                      },
+                      child: Hero(
+                        tag: "assets/modelgrid1.jpeg",
+                        child: Container(
+                          height: 200,
+                          width: (MediaQuery.of(context).size.width - 50) / 2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: AssetImage("assets/modelgrid1.jpeg"),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Detail(
+                                        imgPath: "assets/modelgrid2.jpeg",
+                                      ))),
+                          child: Hero(
+                            tag: "assets/modelgrid2.jpeg",
+                            child: Container(
+                              height: 100,
+                              width:
+                                  (MediaQuery.of(context).size.width - 100) / 2,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/modelgrid2.jpeg"),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => Detail(
+                                      imgPath: "assets/modelgrid3.jpeg"))),
+                          child: Hero(
+                            tag: "assets/modelgrid3.jpeg",
+                            child: Container(
+                              height: 100,
+                              width:
+                                  (MediaQuery.of(context).size.width - 100) / 2,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/modelgrid3.jpeg"),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      height: 25,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.brown.withOpacity(0.2)),
+                      child: Center(
+                        child: Text(
+                          "# Louis Vuitton",
+                          style: TextStyle(
+                              fontFamily: "CustomFont",
+                              fontSize: 10,
+                              color: Colors.brown),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      height: 25,
+                      width: 75,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.brown.withOpacity(0.2)),
+                      child: Center(
+                        child: Text(
+                          "# Chloe",
+                          style: TextStyle(
+                              fontFamily: "CustomFont",
+                              fontSize: 10,
+                              color: Colors.brown),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.reply,
+                      textDirection: TextDirection.rtl,
+                      color: Colors.brown.withOpacity(0.4),
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "1.7K",
+                      style: TextStyle(fontFamily: "CustomFont", fontSize: 16),
+                    ),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    Icon(
+                      Icons.comment,
+                      size: 30,
+                      color: Colors.brown.withOpacity(0.4),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "325",
+                      style: TextStyle(fontFamily: "CustomFont", fontSize: 16),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 245,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          Text(
+                            "2.3K",
+                            style: TextStyle(
+                                fontFamily: "CustomFont", fontSize: 16),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 )
