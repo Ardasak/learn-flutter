@@ -1,0 +1,36 @@
+[
+    {
+        "brand": "Mercedes",
+        "country": "Germany",
+        "foundation_year": 1900,
+        "model": [
+            {
+                "model_name:": "C200e",
+                "price": 600000,
+                "gasoline": true
+            },
+            {
+                "model_name:": "A180",
+                "price": 800000,
+                "gasoline": false
+            }
+        ]
+    },
+    {
+        "brand": "Audi",
+        "country": "Germany",
+        "foundation_year": 1909,
+        "model": [
+            {
+                "model_name": "A3",
+                "price": 650000,
+                "gasoline": true
+            },
+            {
+                "model_name:": "R8",
+                "price": 550000,
+                "gasoline": true
+            }
+        ]
+    }
+]
